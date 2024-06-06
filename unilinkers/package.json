@@ -23,6 +23,7 @@
     "dependencies": {
         "pinia": "^2.1.7",
         "vue-axios": "^3.5.2",
-        "vue-router": "^4.3.2"
+        "vue-router": "^4.3.2",
+        "vuetify": "^3.6.8"
     }
 }
