@@ -15,6 +15,9 @@ class Property extends Model
         'town',
         'county',
         'postcode',
+        'image_url',
+        'description',
+        'rating',
     ];
 
     public function rooms()

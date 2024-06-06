@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('town');
             $table->string('county');
             $table->string('postcode');
+            $table->string('image_url');
+            $table->text('description');
+            $table->unsignedTinyInteger('rating');
             $table->timestamps();
         });
     }

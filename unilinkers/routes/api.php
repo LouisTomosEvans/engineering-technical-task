@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,21 +26,21 @@ use Illuminate\Support\Facades\Route;
 // ** PUBLIC ROUTES **
 
 // Get all properties
-Route::get('/api/properties', 'PropertyController@index');
+Route::get('/properties', [PropertyController::class, 'index']);
 
 // Get a single property
-Route::get('/api/properties/{id}', 'PropertyController@show');
+Route::get('/properties/{id}', [PropertyController::class, 'show']);
 
 
 // ** PROTECTED ROUTES **
 // Create a new property
-Route::post('/api/properties', 'PropertyController@store')->middleware('auth:sanctum');
+Route::post('/properties', [PropertyController::class, 'store']);
 
 // Update a property
-Route::put('/api/properties/{property}', 'PropertyController@update')->middleware('auth:sanctum');
+Route::put('/properties/{property}', [PropertyController::class, 'update']);
 
 // Delete a property
-Route::delete('/api/properties/{property}', 'PropertyController@destroy')->middleware('auth:sanctum');
+Route::delete('/properties/{property}', [PropertyController::class, 'destroy']);
 
 
 /*
@@ -48,17 +51,29 @@ Route::delete('/api/properties/{property}', 'PropertyController@destroy')->middl
 
 // ** PUBLIC ROUTES **
 // Get all rooms
-Route::get('/api/rooms', 'RoomController@index');
+Route::get('/rooms', [RoomController::class, 'index']);
 
 // Get all rooms for a specific property
-Route::get('/api/rooms/{property}', 'RoomController@getByProperty');
+Route::get('/rooms/{property}', [RoomController::class, 'getByProperty']);
 
 // ** PROTECTED ROUTES **
 // Create a new room
-Route::post('/api/rooms', 'RoomController@store')->middleware('auth:sanctum');
+Route::post('/rooms', [RoomController::class, 'store']);
 
 // Update a room
-Route::put('/api/rooms/{room}', 'RoomController@update')->middleware('auth:sanctum');
+Route::put('/rooms/{room}', [RoomController::class, 'update']);
 
 // Delete a room
-Route::delete('/api/rooms/{room}', 'RoomController@destroy')->middleware('auth:sanctum');
+Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
+
+
+/*
+|--------------------------------------------------------------------------
+| User routes
+|--------------------------------------------------------------------------
+*/
+
+// Check if user is logged in - for route authentication
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    return $request->user();
+});
